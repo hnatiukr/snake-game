@@ -4,6 +4,7 @@
 
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100vw;
@@ -23,4 +24,27 @@ body {
   box-sizing: content-box;
 
   border: 5px solid darkolivegreen;
+}
+
+h2 {
+  color: darkolivegreen;
+}
+
+#game_over {
+  position: absolute;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 1125px;
+  height: 675px;
+
+  visibility: hidden;
+
+  color: white;
+
+  background-color: rgba(179, 82, 84, 0.7);
 }

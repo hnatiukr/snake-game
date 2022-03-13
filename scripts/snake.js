@@ -1,16 +1,20 @@
 const canvas = document.getElementById("canvas");
+const gameOver = document.getElementById("game_over");
+const currentScore = document.getElementById("score");
+const bestScore = document.getElementById("best_score");
 
 const ROWS = 45;
 const COLS = 75;
 const PIXEL = 15;
 
+let score = 0;
 const pixels = new Map();
 let gameInterval = null;
 
-const moveRight = ([t, l]) => [t, l + 1];
-const moveLeft = ([t, l]) => [t, l - 1];
-const moveUp = ([t, l]) => [t - 1, l];
-const moveDown = ([t, l]) => [t + 1, l];
+const moveRight = ([top, left]) => [top, left + 1];
+const moveLeft = ([top, left]) => [top, left - 1];
+const moveUp = ([top, left]) => [top - 1, left];
+const moveDown = ([top, left]) => [top + 1, left];
 
 // --- rendering ---
 
@@ -45,15 +49,21 @@ function drawCanvas() {
 
       if (key === currentFoodKey) {
         background = "orangered";
+        pixel.style.borderRadius = "50%";
       } else if (currentSnakeKeys.has(key)) {
         const transformSet = [...currentSnakeKeys];
         const head = transformSet[transformSet.length - 1];
 
+        pixel.style.borderRadius = "3px";
+
         if (key === head) {
-          background = "sandybrown";
+          background = "#fff";
+          pixel.style.borderRadius = "50%";
         } else {
-          background = "saddlebrown";
+          background = "#315831";
         }
+      } else {
+        pixel.style.borderRadius = "0";
       }
 
       pixel.style.background = background;
@@ -97,6 +107,8 @@ function step() {
   pushHead(nextHead);
 
   if (toKey(nextHead) === currentFoodKey) {
+    updateScore();
+
     const nextFoodKey = spawnFood();
 
     if (nextFoodKey === null) {
@@ -151,6 +163,25 @@ function spawnFood() {
   }
 
   throw Error("should never get here");
+}
+
+function updateScore() {
+  score += 1;
+  currentScore.innerHTML = score;
+
+  if (window.localStorage.hasOwnProperty("score")) {
+    if (score > Number(window.localStorage.getItem("score"))) {
+      bestScore.innerHTML = score;
+
+      window.localStorage.setItem("score", JSON.stringify(score));
+    } else {
+      bestScore.innerHTML = window.localStorage.getItem("score");
+    }
+  } else {
+    bestScore.innerHTML = score;
+
+    window.localStorage.setItem("score", JSON.stringify(score));
+  }
 }
 
 // --- interaction ---
@@ -212,17 +243,22 @@ window.addEventListener("keydown", (e) => {
 });
 
 function stopGame(isSuccessfully) {
-  canvas.style.borderColor = isSuccessfully ? "darkgreen" : "darkred";
+  gameOver.style.visibility = "visible";
+  canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#b35253";
 
+  updateScore();
   clearInterval(gameInterval);
 }
 
 function startGame() {
+  score = 0;
   directionQueue = [];
   currentDirection = moveRight;
   currentSnake = makeInitialSnake();
   currentSnakeKeys = new Set();
   currentVacantKeys = new Set();
+
+  gameOver.style.visibility = "hidden";
 
   for (let top = 0; top < ROWS; top += 1) {
     for (let left = 0; left < COLS; left += 1) {
@@ -245,6 +281,8 @@ function startGame() {
   currentVacantKeys = vacantKeys;
 
   canvas.style.borderColor = "";
+  currentScore.innerHTML = score.toString();
+
   gameInterval = setInterval(step, 50);
 
   drawCanvas();

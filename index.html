@@ -10,12 +10,19 @@
 
     <title>Snake</title>
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles/styles.css" />
   </head>
 
   <body>
-    <div id="canvas"></div>
+    <div id="canvas">
+      <div id="game_over">
+        <h1>GAME OVER</h1>
 
-    <script src="snake.js"></script>
+        <h3>YOUR SCORE: <span id="score"></span></h3>
+        <h3>BEST SCORE: <span id="best_score"></span></h3>
+      </div>
+    </div>
+
+    <script src="scripts/snake.js"></script>
   </body>
 </html>
