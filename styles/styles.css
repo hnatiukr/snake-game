@@ -22,15 +22,14 @@ body {
   height: 600px;
 
   box-sizing: content-box;
-
-  border: 1px solid #f1cc28;
 }
 
 h2 {
   color: darkolivegreen;
 }
 
-#game_over {
+#game_over_screen,
+#start_screen {
   position: absolute;
   z-index: 3;
 
@@ -49,7 +48,14 @@ h2 {
   background-color: #ffd829;
 }
 
-#restart {
+#start_screen {
+  visibility: visible;
+
+  border-color: #ffd829;
+}
+
+#restart,
+#start {
   display: flex;
   justify-content: center;
   align-items: center;

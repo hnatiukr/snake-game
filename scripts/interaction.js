@@ -55,7 +55,7 @@ window.addEventListener("keydown", (e) => {
 });
 
 function stopGame(isSuccessfully) {
-  gameOver.style.visibility = "visible";
+  gameOverScreen.style.visibility = "visible";
   canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#FFD829";
 
   saveScore();
@@ -71,7 +71,7 @@ function startGame() {
   currentSnakeKeys = new Set();
   currentVacantKeys = new Set();
 
-  gameOver.style.visibility = "hidden";
+  gameOverScreen.style.visibility = "hidden";
 
   for (let top = 0; top < ROWS; top += 1) {
     for (let left = 0; left < COLS; left += 1) {
@@ -101,7 +101,14 @@ function startGame() {
   drawCanvas();
 }
 
-restart.addEventListener("click", (event) => {
+start.addEventListener("click", () => {
+  startScreen.style.visibility = "hidden";
+
+  initializeCanvas();
+  startGame();
+});
+
+restart.addEventListener("click", () => {
   stopGame(false);
   startGame();
 });

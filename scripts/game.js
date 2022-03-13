@@ -1,2 +1,0 @@
-initializeCanvas();
-startGame();

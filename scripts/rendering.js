@@ -4,7 +4,6 @@ function initializeCanvas() {
       const pixel = document.createElement("div");
 
       pixel.style.position = "absolute";
-      pixel.style.border = "1px solid #FFD829";
       pixel.style.left = left * PIXEL + "px";
       pixel.style.top = top * PIXEL + "px";
       pixel.style.width = PIXEL + "px";
@@ -32,9 +31,8 @@ function drawCanvas() {
       if (key === currentFoodKey) {
         background = "orangered";
       } else if (currentSnakeKeys.has(key)) {
-        const transformSet = [...currentSnakeKeys];
-        const head = transformSet[transformSet.length - 1];
-        const tail = transformSet[0];
+        const snakeKeysArray = [...currentSnakeKeys];
+        const head = snakeKeysArray[snakeKeysArray.length - 1];
 
         if (key === head) {
           background = "black";

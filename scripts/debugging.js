@@ -22,7 +22,7 @@ function checkIntegrity_SLOW() {
   let [snakeKeys, vacantKeys] = partitionCells(currentSnake);
 
   if (!areSameSets_SLOW(snakeKeys, currentSnakeKeys)) {
-    failedCheck = "snake keys don’t match";
+    failedCheck = "snake-game keys don’t match";
   }
 
   if (!areSameSets_SLOW(vacantKeys, currentVacantKeys)) {
@@ -30,11 +30,11 @@ function checkIntegrity_SLOW() {
   }
 
   if (currentSnakeKeys.has(currentFoodKey)) {
-    failedCheck = "there’s food in the snake";
+    failedCheck = "there’s food in the snake-game";
   }
 
   if (currentSnake.length !== currentSnakeKeys.size) {
-    failedCheck = "the snake intersects itself";
+    failedCheck = "the snake-game intersects itself";
   }
 
   if (
@@ -55,7 +55,7 @@ function checkIntegrity_SLOW() {
       (dy === 0 && Math.abs(dx) === 1) || (dx === 0 && Math.abs(dy) === 1);
 
     if (!isOk) {
-      failedCheck = "the snake has a break";
+      failedCheck = "the snake-game has a break";
     }
   }
 

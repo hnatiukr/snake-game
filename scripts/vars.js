@@ -1,8 +1,10 @@
+const start = document.getElementById("start");
 const canvas = document.getElementById("canvas");
 const restart = document.getElementById("restart");
-const gameOver = document.getElementById("game_over");
 const currentScore = document.getElementById("score");
 const bestScore = document.getElementById("best_score");
+const startScreen = document.getElementById("start_screen");
+const gameOverScreen = document.getElementById("game_over_screen");
 
 const ROWS = 30;
 const COLS = 50;
