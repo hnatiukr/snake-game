@@ -12,7 +12,7 @@ body {
   margin: 0;
   padding: 0;
 
-  background-color: #529752;
+  background-color: #FFD829;
 }
 
 #canvas {
@@ -23,7 +23,7 @@ body {
 
   box-sizing: content-box;
 
-  border: 5px solid darkolivegreen;
+  border: 1px solid black;
 }
 
 h2 {
@@ -44,7 +44,7 @@ h2 {
 
   visibility: hidden;
 
-  color: white;
+  color: black;
 
-  background-color: rgba(179, 82, 84, 0.7);
+  background-color: #FFD829;
 }

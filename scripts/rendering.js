@@ -4,7 +4,7 @@ function initializeCanvas() {
       const pixel = document.createElement("div");
 
       pixel.style.position = "absolute";
-      pixel.style.border = "0.5px solid darkolivegreen";
+      pixel.style.border = "1px solid #FFD829";
       pixel.style.left = left * PIXEL + "px";
       pixel.style.top = top * PIXEL + "px";
       pixel.style.width = PIXEL + "px";
@@ -23,25 +23,21 @@ function drawCanvas() {
     for (let left = 0; left < COLS; left += 1) {
       const key = toKey([top, left]);
       const pixel = pixels.get(key);
-      let background = "#529752";
+      let background = "#FFD829";
 
       if (key === currentFoodKey) {
         background = "orangered";
-        pixel.style.borderRadius = "50%";
       } else if (currentSnakeKeys.has(key)) {
         const transformSet = [...currentSnakeKeys];
         const head = transformSet[transformSet.length - 1];
 
-        pixel.style.borderRadius = "3px";
 
         if (key === head) {
-          background = "#fff";
-          pixel.style.borderRadius = "50%";
+          background = "white";
         } else {
-          background = "#315831";
+          background = "black";
         }
       } else {
-        pixel.style.borderRadius = "0";
       }
 
       pixel.style.background = background;

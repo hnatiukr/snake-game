@@ -56,7 +56,7 @@ window.addEventListener("keydown", (e) => {
 
 function stopGame(isSuccessfully) {
   gameOver.style.visibility = "visible";
-  canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#b35253";
+  canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#FFD829";
 
   updateScore();
   clearInterval(gameInterval);
