@@ -58,13 +58,13 @@ function stopGame(isSuccessfully) {
   gameOver.style.visibility = "visible";
   canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#FFD829";
 
-  updateScore();
+  saveScore();
   clearInterval(gameInterval);
 }
 
 function startGame() {
   score = 0;
-  timeout = 70;
+  timeout = 80;
   directionQueue = [];
   currentDirection = moveRight;
   currentSnake = makeInitialSnake();
@@ -100,3 +100,8 @@ function startGame() {
 
   drawCanvas();
 }
+
+restart.addEventListener("click", (event) => {
+  stopGame(false);
+  startGame();
+});

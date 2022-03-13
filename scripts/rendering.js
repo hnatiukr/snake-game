@@ -25,6 +25,10 @@ function drawCanvas() {
       const pixel = pixels.get(key);
       let background = "#FFD829";
 
+      if ((isOdd(top) && isEven(left)) || (isEven(top) && isOdd(left))) {
+        background = "#fde33f";
+      }
+
       if (key === currentFoodKey) {
         background = "orangered";
       } else if (currentSnakeKeys.has(key)) {
@@ -33,9 +37,7 @@ function drawCanvas() {
         const tail = transformSet[0];
 
         if (key === head) {
-          background = "white";
-        } else if (key === tail) {
-          pixel.style.transition = "all 0.2s ease-in";
+          background = "black";
         } else {
           background = "black";
         }

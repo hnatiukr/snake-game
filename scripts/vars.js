@@ -1,14 +1,15 @@
 const canvas = document.getElementById("canvas");
+const restart = document.getElementById("restart");
 const gameOver = document.getElementById("game_over");
 const currentScore = document.getElementById("score");
 const bestScore = document.getElementById("best_score");
 
-const ROWS = 45;
-const COLS = 75;
-const PIXEL = 15;
+const ROWS = 30;
+const COLS = 50;
+const PIXEL = 20;
 
+let timeout;
 let score = 0;
-let timeout = 70;
 const pixels = new Map();
 let gameInterval = null;
 

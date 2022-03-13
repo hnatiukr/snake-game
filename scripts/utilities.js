@@ -69,3 +69,11 @@ function makeInitialSnake() {
 function toKey([top, left]) {
   return top + "_" + left;
 }
+
+function isEven(number) {
+  return number % 2 === 0;
+}
+
+function isOdd(number) {
+  return Math.abs(number % 2) === 1;
+}

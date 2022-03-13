@@ -25,8 +25,10 @@ function step() {
   pushHead(nextHead);
 
   if (toKey(nextHead) === currentFoodKey) {
+    score += 1;
+
     updateTimeout();
-    updateScore();
+    saveScore();
 
     const nextFoodKey = spawnFood();
 
@@ -84,8 +86,7 @@ function spawnFood() {
   throw Error("should never get here");
 }
 
-function updateScore() {
-  score += 1;
+function saveScore() {
   currentScore.innerHTML = score;
 
   if (window.localStorage.hasOwnProperty("score")) {
@@ -108,5 +109,7 @@ function updateTimeout() {
     return timeout;
   }
 
-  return (timeout -= 5);
+  timeout -= 5;
+
+  return timeout;
 }
