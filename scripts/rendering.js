@@ -30,14 +30,15 @@ function drawCanvas() {
       } else if (currentSnakeKeys.has(key)) {
         const transformSet = [...currentSnakeKeys];
         const head = transformSet[transformSet.length - 1];
-
+        const tail = transformSet[0];
 
         if (key === head) {
           background = "white";
+        } else if (key === tail) {
+          pixel.style.transition = "all 0.2s ease-in";
         } else {
           background = "black";
         }
-      } else {
       }
 
       pixel.style.background = background;

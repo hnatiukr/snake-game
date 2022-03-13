@@ -108,5 +108,5 @@ function updateTimeout() {
     return timeout;
   }
 
-  return timeout -= 5;
+  return (timeout -= 5);
 }
