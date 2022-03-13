@@ -1,0 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  background-color: #529752;
+}
+
+#canvas {
+  position: relative;
+
+  width: 1125px;
+  height: 675px;
+
+  box-sizing: content-box;
+
+  border: 5px solid darkolivegreen;
+}
