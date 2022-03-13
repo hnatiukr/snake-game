@@ -8,6 +8,7 @@ const COLS = 75;
 const PIXEL = 15;
 
 let score = 0;
+let timeout = 70;
 const pixels = new Map();
 let gameInterval = null;
 

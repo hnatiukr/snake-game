@@ -64,6 +64,7 @@ function stopGame(isSuccessfully) {
 
 function startGame() {
   score = 0;
+  timeout = 70;
   directionQueue = [];
   currentDirection = moveRight;
   currentSnake = makeInitialSnake();
@@ -95,7 +96,7 @@ function startGame() {
   canvas.style.borderColor = "";
   currentScore.innerHTML = score.toString();
 
-  gameInterval = setInterval(step, 50);
+  gameInterval = setInterval(step, updateTimeout());
 
   drawCanvas();
 }

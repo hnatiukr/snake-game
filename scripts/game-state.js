@@ -25,6 +25,7 @@ function step() {
   pushHead(nextHead);
 
   if (toKey(nextHead) === currentFoodKey) {
+    updateTimeout();
     updateScore();
 
     const nextFoodKey = spawnFood();
@@ -100,4 +101,12 @@ function updateScore() {
 
     window.localStorage.setItem("score", JSON.stringify(score));
   }
+}
+
+function updateTimeout() {
+  if (timeout <= 40) {
+    return timeout;
+  }
+
+  return timeout -= 5;
 }
