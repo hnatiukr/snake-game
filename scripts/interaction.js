@@ -1,11 +1,11 @@
-window.addEventListener("keydown", (e) => {
-  if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) {
+window.addEventListener("keydown", (event) => {
+  if (event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) {
     return;
   }
 
-  e.preventDefault();
+  event.preventDefault();
 
-  switch (e.key) {
+  switch (event.key) {
     case "ArrowLeft":
     case "A":
     case "a": {
@@ -42,6 +42,18 @@ window.addEventListener("keydown", (e) => {
     case "r": {
       stopGame(false);
       startGame();
+
+      break;
+    }
+
+    case "Enter": {
+      if (startScreen.dataset.open === "true") {
+        startScreen.dataset.open = "false";
+        startScreen.style.visibility = "hidden";
+
+        initializeCanvas();
+        startGame();
+      }
 
       break;
     }
@@ -101,14 +113,18 @@ function startGame() {
   drawCanvas();
 }
 
-start.addEventListener("click", () => {
+start.addEventListener("click", (event) => {
+  event.preventDefault();
+
   startScreen.style.visibility = "hidden";
 
   initializeCanvas();
   startGame();
 });
 
-restart.addEventListener("click", () => {
+restart.addEventListener("click", (event) => {
+  event.preventDefault();
+
   stopGame(false);
   startGame();
 });

@@ -16,10 +16,12 @@
 
   <body>
     <div id="canvas">
-      <div id="start_screen">
+      <div id="start_screen" data-open="true">
         <h1>SNAKE GAME</h1>
 
         <button id="start">START</button>
+
+        <span>or press <span class="orangered">Enter</span> to start</span>
       </div>
 
       <div id="game_over_screen">
@@ -64,16 +66,13 @@
     </a>
 
     <!--
-
       Scripts order:
-
-      1. vars
-      2. rendering
-      3. game-state
-      4. interaction
-      5. utilities
-      6. debugging
-
+        1. vars
+        2. rendering
+        3. game-state
+        4. interaction
+        5. utilities
+        6. debugging
     -->
 
     <script src="scripts/vars.js"></script>
