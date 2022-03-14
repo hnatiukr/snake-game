@@ -25,6 +25,10 @@ function step() {
   pushHead(nextHead);
 
   if (toKey(nextHead) === currentFoodKey) {
+    moveSound.pause();
+    moveSound.currentTime = 0;
+    eatSound.play();
+
     score += 1;
 
     updateTimeout();
@@ -87,26 +91,26 @@ function spawnFood() {
 }
 
 function saveScore() {
-  currentScore.innerHTML = score;
-  stat.innerHTML = score;
+  gameOverScore.innerHTML = score;
+  scoreInGame.innerHTML = score;
 
   if (window.localStorage.hasOwnProperty("score")) {
     if (score > Number(window.localStorage.getItem("score"))) {
-      bestScore.innerHTML = score;
+      gameOverBestScore.innerHTML = score;
 
       window.localStorage.setItem("score", JSON.stringify(score));
     } else {
-      bestScore.innerHTML = window.localStorage.getItem("score");
+      gameOverBestScore.innerHTML = window.localStorage.getItem("score");
     }
   } else {
-    bestScore.innerHTML = score;
+    gameOverBestScore.innerHTML = score;
 
     window.localStorage.setItem("score", JSON.stringify(score));
   }
 }
 
 function updateTimeout() {
-  if (timeout <= 40) {
+  if (timeout <= 35) {
     return timeout;
   }
 

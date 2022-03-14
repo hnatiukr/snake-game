@@ -16,12 +16,12 @@
 
   <body>
     <div id="canvas">
-      <pre><code id="stat"></code></pre>
+      <pre><code id="score_in_game"></code></pre>
 
       <div id="start_screen" data-open="true">
         <h1>SNAKE GAME</h1>
 
-        <button id="start">START</button>
+        <button id="start_button">START</button>
 
         <span>or press <span class="orangered">Enter</span> to start</span>
       </div>
@@ -29,14 +29,19 @@
       <div id="game_over_screen">
         <h1>GAME OVER</h1>
 
-        <h3>YOUR SCORE: <span id="score"></span></h3>
-        <h3>BEST SCORE: <span id="best_score"></span></h3>
+        <h3>YOUR SCORE: <span id="game_over_score"></span></h3>
+        <h3>BEST SCORE: <span id="game_over_best_score"></span></h3>
 
-        <button id="restart">RESTART</button>
+        <button id="restart_button">RESTART</button>
 
         <span>or press <span class="orangered">R</span> to restart</span>
       </div>
     </div>
+
+    <audio id="eat-sound" src="sounds/eat.wav"></audio>
+    <audio id="move-sound" src="sounds/move.wav"></audio>
+    <audio id="start-sound" src="sounds/start.wav"></audio>
+    <audio id="game-over-sound" src="sounds/game-over.wav"></audio>
 
     <a
       class="github-corner"

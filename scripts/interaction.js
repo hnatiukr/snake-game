@@ -9,6 +9,8 @@ window.addEventListener("keydown", (event) => {
     case "ArrowLeft":
     case "A":
     case "a": {
+      useMoveSound(moveLeft);
+
       directionQueue.push(moveLeft);
 
       break;
@@ -17,6 +19,8 @@ window.addEventListener("keydown", (event) => {
     case "ArrowRight":
     case "D":
     case "d": {
+      useMoveSound(moveRight);
+
       directionQueue.push(moveRight);
 
       break;
@@ -25,6 +29,8 @@ window.addEventListener("keydown", (event) => {
     case "ArrowUp":
     case "W":
     case "w": {
+      useMoveSound(moveUp);
+
       directionQueue.push(moveUp);
 
       break;
@@ -33,6 +39,8 @@ window.addEventListener("keydown", (event) => {
     case "ArrowDown":
     case "S":
     case "s": {
+      useMoveSound(moveDown);
+
       directionQueue.push(moveDown);
 
       break;
@@ -67,7 +75,10 @@ window.addEventListener("keydown", (event) => {
 });
 
 function stopGame(isSuccessfully) {
-  stat.style.visibility = "hidden";
+  gameOver = true;
+  gameOverSound.play();
+
+  scoreInGame.style.visibility = "hidden";
   gameOverScreen.style.visibility = "visible";
   canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#FFD829";
 
@@ -76,6 +87,9 @@ function stopGame(isSuccessfully) {
 }
 
 function startGame() {
+  gameOver = false;
+  startSound.play();
+
   score = 0;
   timeout = 80;
   directionQueue = [];
@@ -84,7 +98,7 @@ function startGame() {
   currentSnakeKeys = new Set();
   currentVacantKeys = new Set();
 
-  stat.style.visibility = "visible";
+  scoreInGame.style.visibility = "visible";
   gameOverScreen.style.visibility = "hidden";
 
   for (let top = 0; top < ROWS; top += 1) {
@@ -108,8 +122,8 @@ function startGame() {
   currentVacantKeys = vacantKeys;
 
   canvas.style.borderColor = "";
-  currentScore.innerHTML = score;
-  stat.innerHTML = score;
+  gameOverScore.innerHTML = score;
+  scoreInGame.innerHTML = score;
 
   gameInterval = setInterval(step, updateTimeout());
 

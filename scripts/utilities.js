@@ -18,6 +18,26 @@ function areOpposite(dir1, dir2) {
   return false;
 }
 
+function areSame(dir1, dir2) {
+  if (dir1 === moveLeft && dir2 === moveLeft) {
+    return true;
+  }
+
+  if (dir1 === moveRight && dir2 === moveRight) {
+    return true;
+  }
+
+  if (dir1 === moveUp && dir2 === moveUp) {
+    return true;
+  }
+
+  if (dir1 === moveDown && dir2 === moveDown) {
+    return true;
+  }
+
+  return false;
+}
+
 function partitionCells(snake) {
   const snakeKeys = new Set();
   const vacantKeys = new Set();
@@ -76,4 +96,12 @@ function isEven(number) {
 
 function isOdd(number) {
   return Math.abs(number % 2) === 1;
+}
+
+function useMoveSound(direction) {
+  if (!areSame(currentDirection, direction) && !gameOver) {
+    moveSound.pause();
+    moveSound.currentTime = 0;
+    moveSound.play();
+  }
 }
