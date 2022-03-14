@@ -67,6 +67,7 @@ window.addEventListener("keydown", (event) => {
 });
 
 function stopGame(isSuccessfully) {
+  stat.style.visibility = "hidden";
   gameOverScreen.style.visibility = "visible";
   canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#FFD829";
 
@@ -83,6 +84,7 @@ function startGame() {
   currentSnakeKeys = new Set();
   currentVacantKeys = new Set();
 
+  stat.style.visibility = "visible";
   gameOverScreen.style.visibility = "hidden";
 
   for (let top = 0; top < ROWS; top += 1) {
@@ -106,7 +108,8 @@ function startGame() {
   currentVacantKeys = vacantKeys;
 
   canvas.style.borderColor = "";
-  currentScore.innerHTML = score.toString();
+  currentScore.innerHTML = score;
+  stat.innerHTML = score;
 
   gameInterval = setInterval(step, updateTimeout());
 

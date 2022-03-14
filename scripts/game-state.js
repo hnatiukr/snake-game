@@ -88,6 +88,7 @@ function spawnFood() {
 
 function saveScore() {
   currentScore.innerHTML = score;
+  stat.innerHTML = score;
 
   if (window.localStorage.hasOwnProperty("score")) {
     if (score > Number(window.localStorage.getItem("score"))) {

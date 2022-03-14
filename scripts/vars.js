@@ -1,3 +1,4 @@
+const stat = document.getElementById("stat");
 const start = document.getElementById("start");
 const canvas = document.getElementById("canvas");
 const restart = document.getElementById("restart");

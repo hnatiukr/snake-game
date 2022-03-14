@@ -81,3 +81,10 @@ h2 {
 .orangered {
   color: orangered;
 }
+
+pre {
+  position: absolute;
+
+  top: -30px;
+  right: 0;
+}
