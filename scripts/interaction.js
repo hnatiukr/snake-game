@@ -94,7 +94,8 @@ function startGame() {
   timeout = 80;
   directionQueue = [];
   currentDirection = moveRight;
-  currentSnake = makeInitialSnake();
+  currentSnake = makeInitialSnake(35);
+
   currentSnakeKeys = new Set();
   currentVacantKeys = new Set();
 

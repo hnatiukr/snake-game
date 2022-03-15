@@ -76,14 +76,14 @@ function checkValidHead(keys, cell) {
   return true;
 }
 
-function makeInitialSnake() {
-  return [
-    [0, 0],
-    [0, 1],
-    [0, 2],
-    [0, 3],
-    [0, 4],
-  ];
+function makeInitialSnake(length) {
+  const initialSnake = [];
+
+  for (let index of [...Array(length).keys()]) {
+    initialSnake[index] = [0, index];
+  }
+
+  return initialSnake;
 }
 
 function toKey([top, left]) {

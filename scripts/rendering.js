@@ -8,6 +8,7 @@ function initializeCanvas() {
       pixel.style.top = top * PIXEL + "px";
       pixel.style.width = PIXEL + "px";
       pixel.style.height = PIXEL + "px";
+      pixel.style.border = "0.5px solid #ffd829";
 
       const key = toKey([top, left]);
 
@@ -35,7 +36,7 @@ function drawCanvas() {
         const head = snakeKeysArray[snakeKeysArray.length - 1];
 
         if (key === head) {
-          background = "black";
+          background = "white";
         } else {
           background = "black";
         }
