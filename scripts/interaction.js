@@ -1,4 +1,4 @@
-window.addEventListener("keydown", (event) => {
+window.addEventListener('keydown', (event) => {
   if (event.shiftKey || event.ctrlKey || event.altKey || event.metaKey) {
     return;
   }
@@ -6,9 +6,9 @@ window.addEventListener("keydown", (event) => {
   event.preventDefault();
 
   switch (event.key) {
-    case "ArrowLeft":
-    case "A":
-    case "a": {
+    case 'ArrowLeft':
+    case 'A':
+    case 'a': {
       useMoveSound(moveLeft);
 
       directionQueue.push(moveLeft);
@@ -16,9 +16,9 @@ window.addEventListener("keydown", (event) => {
       break;
     }
 
-    case "ArrowRight":
-    case "D":
-    case "d": {
+    case 'ArrowRight':
+    case 'D':
+    case 'd': {
       useMoveSound(moveRight);
 
       directionQueue.push(moveRight);
@@ -26,9 +26,9 @@ window.addEventListener("keydown", (event) => {
       break;
     }
 
-    case "ArrowUp":
-    case "W":
-    case "w": {
+    case 'ArrowUp':
+    case 'W':
+    case 'w': {
       useMoveSound(moveUp);
 
       directionQueue.push(moveUp);
@@ -36,9 +36,9 @@ window.addEventListener("keydown", (event) => {
       break;
     }
 
-    case "ArrowDown":
-    case "S":
-    case "s": {
+    case 'ArrowDown':
+    case 'S':
+    case 's': {
       useMoveSound(moveDown);
 
       directionQueue.push(moveDown);
@@ -46,18 +46,18 @@ window.addEventListener("keydown", (event) => {
       break;
     }
 
-    case "R":
-    case "r": {
+    case 'R':
+    case 'r': {
       stopGame(false);
       startGame();
 
       break;
     }
 
-    case "Enter": {
-      if (startScreen.dataset.open === "true") {
-        startScreen.dataset.open = "false";
-        startScreen.style.visibility = "hidden";
+    case 'Enter': {
+      if (startScreen.dataset.open === 'true') {
+        startScreen.dataset.open = 'false';
+        startScreen.style.visibility = 'hidden';
 
         initializeCanvas();
         startGame();
@@ -66,7 +66,7 @@ window.addEventListener("keydown", (event) => {
       break;
     }
 
-    case " ": {
+    case ' ': {
       step();
 
       break;
@@ -74,16 +74,16 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-start.addEventListener("click", (event) => {
+start.addEventListener('click', (event) => {
   event.preventDefault();
 
-  startScreen.style.visibility = "hidden";
+  startScreen.style.visibility = 'hidden';
 
   initializeCanvas();
   startGame();
 });
 
-restart.addEventListener("click", (event) => {
+restart.addEventListener('click', (event) => {
   event.preventDefault();
 
   stopGame(false);

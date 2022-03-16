@@ -87,7 +87,7 @@ function makeInitialSnake(length) {
 }
 
 function toKey([top, left]) {
-  return top + "_" + left;
+  return top + '_' + left;
 }
 
 function isEven(number) {

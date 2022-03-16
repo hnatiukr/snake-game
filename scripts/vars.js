@@ -1,19 +1,19 @@
-const canvas = document.getElementById("canvas");
+const canvas = document.getElementById('canvas');
 
-const start = document.getElementById("start_button");
-const restart = document.getElementById("restart_button");
+const start = document.getElementById('start_button');
+const restart = document.getElementById('restart_button');
 
-const eatSound = document.getElementById("eat-sound");
-const moveSound = document.getElementById("move-sound");
-const startSound = document.getElementById("start-sound");
-const gameOverSound = document.getElementById("game-over-sound");
+const eatSound = document.getElementById('eat-sound');
+const moveSound = document.getElementById('move-sound');
+const startSound = document.getElementById('start-sound');
+const gameOverSound = document.getElementById('game-over-sound');
 
-const startScreen = document.getElementById("start_screen");
-const gameOverScreen = document.getElementById("game_over_screen");
+const startScreen = document.getElementById('start_screen');
+const gameOverScreen = document.getElementById('game_over_screen');
 
-const scoreInGame = document.getElementById("score_in_game");
-const gameOverScore = document.getElementById("game_over_score");
-const gameOverBestScore = document.getElementById("game_over_best_score");
+const scoreInGame = document.getElementById('score_in_game');
+const gameOverScore = document.getElementById('game_over_score');
+const gameOverBestScore = document.getElementById('game_over_best_score');
 
 const ROWS = 30;
 const COLS = 50;

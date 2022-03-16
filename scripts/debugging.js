@@ -16,25 +16,25 @@ function checkIntegrity_SLOW() {
   }
 
   if (foodCount !== 1) {
-    failedCheck = "there cannot be two foods";
+    failedCheck = 'there cannot be two foods';
   }
 
   let [snakeKeys, vacantKeys] = partitionCells(currentSnake);
 
   if (!areSameSets_SLOW(snakeKeys, currentSnakeKeys)) {
-    failedCheck = "snake-game keys don’t match";
+    failedCheck = 'snake-game keys don’t match';
   }
 
   if (!areSameSets_SLOW(vacantKeys, currentVacantKeys)) {
-    failedCheck = "vacant keys don’t match";
+    failedCheck = 'vacant keys don’t match';
   }
 
   if (currentSnakeKeys.has(currentFoodKey)) {
-    failedCheck = "there’s food in the snake-game";
+    failedCheck = 'there’s food in the snake-game';
   }
 
   if (currentSnake.length !== currentSnakeKeys.size) {
-    failedCheck = "the snake-game intersects itself";
+    failedCheck = 'the snake-game intersects itself';
   }
 
   if (
@@ -43,7 +43,7 @@ function checkIntegrity_SLOW() {
       allKeys
     )
   ) {
-    failedCheck = "something is out of bounds";
+    failedCheck = 'something is out of bounds';
   }
 
   for (let i = 1 /* intentional */; i < currentSnake.length; i += 1) {
@@ -55,14 +55,14 @@ function checkIntegrity_SLOW() {
       (dy === 0 && Math.abs(dx) === 1) || (dx === 0 && Math.abs(dy) === 1);
 
     if (!isOk) {
-      failedCheck = "the snake-game has a break";
+      failedCheck = 'the snake-game has a break';
     }
   }
 
   if (failedCheck !== null) {
     stopGame(false);
 
-    canvas.style.borderColor = "purple";
+    canvas.style.borderColor = 'purple';
 
     throw Error(failedCheck);
   }

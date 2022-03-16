@@ -49,7 +49,7 @@ function step() {
 
   drawCanvas();
 
-  if (window.location.search === "?debug") {
+  if (window.location.search === '?debug') {
     checkIntegrity_SLOW();
   }
 }
@@ -87,25 +87,25 @@ function spawnFood() {
     i += 1;
   }
 
-  throw Error("should never get here");
+  throw Error('should never get here');
 }
 
 function saveScore() {
   gameOverScore.innerHTML = score;
   scoreInGame.innerHTML = score;
 
-  if (window.localStorage.hasOwnProperty("score")) {
-    if (score > Number(window.localStorage.getItem("score"))) {
+  if (window.localStorage.hasOwnProperty('score')) {
+    if (score > Number(window.localStorage.getItem('score'))) {
       gameOverBestScore.innerHTML = score;
 
-      window.localStorage.setItem("score", JSON.stringify(score));
+      window.localStorage.setItem('score', JSON.stringify(score));
     } else {
-      gameOverBestScore.innerHTML = window.localStorage.getItem("score");
+      gameOverBestScore.innerHTML = window.localStorage.getItem('score');
     }
   } else {
     gameOverBestScore.innerHTML = score;
 
-    window.localStorage.setItem("score", JSON.stringify(score));
+    window.localStorage.setItem('score', JSON.stringify(score));
   }
 }
 
@@ -123,9 +123,9 @@ function stopGame(isSuccessfully) {
   gameOver = true;
   gameOverSound.play();
 
-  scoreInGame.style.visibility = "hidden";
-  gameOverScreen.style.visibility = "visible";
-  canvas.style.borderColor = isSuccessfully ? "darkgreen" : "#FFD829";
+  scoreInGame.style.visibility = 'hidden';
+  gameOverScreen.style.visibility = 'visible';
+  canvas.style.borderColor = isSuccessfully ? 'darkgreen' : '#FFD829';
 
   saveScore();
   clearInterval(gameInterval);
@@ -144,8 +144,8 @@ function startGame() {
   currentSnakeKeys = new Set();
   currentVacantKeys = new Set();
 
-  scoreInGame.style.visibility = "visible";
-  gameOverScreen.style.visibility = "hidden";
+  scoreInGame.style.visibility = 'visible';
+  gameOverScreen.style.visibility = 'hidden';
 
   for (let top = 0; top < ROWS; top += 1) {
     for (let left = 0; left < COLS; left += 1) {
@@ -167,7 +167,7 @@ function startGame() {
   currentSnakeKeys = snakeKeys;
   currentVacantKeys = vacantKeys;
 
-  canvas.style.borderColor = "";
+  canvas.style.borderColor = '';
   gameOverScore.innerHTML = score;
   scoreInGame.innerHTML = score;
 
