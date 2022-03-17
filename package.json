@@ -1,0 +1,17 @@
+{
+  "name": "snake-game",
+  "version": "1.0.0",
+  "description": "Snake is a game where the player maneuvers a growing line that becomes a primary obstacle to itself",
+  "repository": "git@github.com:mort-gh/snake.git",
+  "author": "Roman Hnatiuk <roman.hnatiuk@openvpn.net>",
+  "license": "MIT",
+  "scripts": {
+    "format": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint --quiet --color \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc -p ./tsconfig.json"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.0",
+    "typescript": "^4.6.2"
+  }
+}
