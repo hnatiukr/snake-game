@@ -9,3 +9,5 @@ export type Direction = 'up' | 'down' | 'left' | 'right';
 export type MoveDirection = (coordinates: Coordinates) => Coordinates;
 
 export type Snake = Coordinates[];
+
+export type GameScreen = 'startGame' | 'inGame' | 'gameOver';

@@ -1,1 +1,9 @@
-export type { Key, Coordinates, Direction, MoveDirection, Snake, SetKeys } from './entites';
+export type {
+  Key,
+  Snake,
+  SetKeys,
+  Direction,
+  GameScreen,
+  Coordinates,
+  MoveDirection,
+} from './entites';

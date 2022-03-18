@@ -1,6 +1,6 @@
 import { ROWS, COLS } from './constants';
-import { currentDirection } from './state';
 import { moveSound } from './html-elements';
+import { useDirection, useScreen } from './hooks';
 import type { Key, Direction, MoveDirection, Snake, SetKeys, Coordinates } from './types';
 
 export const move: Record<Direction, MoveDirection> = {
@@ -110,10 +110,11 @@ export function isOdd(number: number): boolean {
   return Math.abs(number % 2) === 1;
 }
 
-export function useMoveSound(direction: MoveDirection): void {
-  // TODO: need to check below if !gameOver to prevent sounds when game is over
+export function useMoveSound(nextDirection: MoveDirection): void {
+  const { screen } = useScreen();
+  const { direction } = useDirection();
 
-  if (!areSame(currentDirection, direction) && moveSound) {
+  if (!areSame(direction, nextDirection) && screen === 'inGame') {
     moveSound.pause();
     moveSound.currentTime = 0;
     moveSound.play();

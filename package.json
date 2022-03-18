@@ -6,8 +6,7 @@
   "author": "Roman Hnatiuk <roman.hnatiuk@openvpn.net>",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --check \"src/**/*.{ts,tsx}\"",
-    "lint": "eslint --quiet --color \"src/**/*.{ts,tsx}\"",
+    "format": "prettier --check \"src/**/*.ts\"",
     "typecheck": "tsc -p ./tsconfig.json"
   },
   "devDependencies": {

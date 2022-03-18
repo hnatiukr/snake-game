@@ -1,6 +1,5 @@
-import { useState } from './state';
 import { canvas } from './html-elements';
-import type { Key, SetKeys } from './types';
+import { useFood, useSnake } from './hooks';
 import { COLS, ROWS, PIXEL } from './constants';
 import { toKey, isOdd, isEven } from './utilities';
 
@@ -30,8 +29,8 @@ export function initializeCanvas(): void {
 }
 
 export function drawCanvas(): void {
-  const [currentFoodKey] = useState<Key>('currentFoodKey');
-  const [currentSnakeKeys] = useState<SetKeys>('currentSnakeKeys');
+  const { foodKey } = useFood();
+  const { snakeKeys } = useSnake();
 
   for (let top = 0; top < ROWS; top += 1) {
     for (let left = 0; left < COLS; left += 1) {
@@ -44,10 +43,10 @@ export function drawCanvas(): void {
         background = '#fde33f';
       }
 
-      if (key === currentFoodKey) {
+      if (key === foodKey) {
         background = 'orangered';
-      } else if (currentSnakeKeys.has(key)) {
-        const snakeKeysArray = [...currentSnakeKeys];
+      } else if (snakeKeys.has(key)) {
+        const snakeKeysArray = [...snakeKeys];
         const head = snakeKeysArray[snakeKeysArray.length - 1];
 
         if (key === head) {

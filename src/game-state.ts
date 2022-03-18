@@ -1,7 +1,7 @@
-import { useState } from './state';
-import { drawCanvas } from './rendering';
 import { COLS, ROWS } from './constants';
-import type { Coordinates, Key, MoveDirection, SetKeys, Snake } from './types';
+import { drawCanvas } from './rendering';
+import type { Coordinates, Key } from './types';
+import { useSnake, useFood, useDirection, useScore, useScreen, useMilliseconds } from './hooks';
 import {
   move,
   toKey,
@@ -22,39 +22,30 @@ import {
   gameOverBestScore,
 } from './html-elements';
 
-export let ms = 100;
-export let score = 0;
-export let gameOver = false;
-
-export let currentSnake: Snake;
-export let currentVacantKeys: SetKeys;
 export let gameInterval: NodeJS.Timeout | null = null;
 
 export function step(): void {
-  const [currentDirection, setCurrentDirection] = useState<MoveDirection>('currentDirection');
+  const { snake, snakeKeys } = useSnake();
+  const { directionQueue, direction, setDirection } = useDirection();
 
-  let nextDirection = currentDirection;
-
-  const [directionQueue] = useState<MoveDirection[]>('directionQueue');
+  let nextDirection = direction;
 
   while (directionQueue.length > 0) {
     const candidateDirection = directionQueue.shift();
 
-    if (candidateDirection && !areOpposite(candidateDirection, currentDirection)) {
+    if (candidateDirection && !areOpposite(candidateDirection, direction)) {
       nextDirection = candidateDirection;
 
       break;
     }
   }
 
-  setCurrentDirection(nextDirection);
+  setDirection(nextDirection);
 
-  const head = currentSnake[currentSnake.length - 1];
-  const nextHead = currentDirection(head);
+  const head = snake[snake.length - 1];
+  const nextHead = direction(head);
 
-  const [currentSnakeKeys] = useState<SetKeys>('currentSnakeKeys');
-
-  if (!checkValidHead(currentSnakeKeys, nextHead)) {
+  if (!checkValidHead(snakeKeys, nextHead)) {
     stopGame(false);
 
     return;
@@ -62,14 +53,16 @@ export function step(): void {
 
   pushHead(nextHead);
 
-  const [currentFoodKey, setCurrentFoodKey] = useState<Key>('currentFoodKey');
+  const { foodKey, setFoodKey } = useFood();
 
-  if (toKey(nextHead) === currentFoodKey) {
+  if (toKey(nextHead) === foodKey) {
+    const { score, setScore } = useScore();
+
     moveSound.pause();
     moveSound.currentTime = 0;
     eatSound.play();
 
-    score += 1;
+    setScore(score + 1);
 
     updateTimeout();
     saveScore();
@@ -82,7 +75,7 @@ export function step(): void {
       return;
     }
 
-    setCurrentFoodKey(nextFoodKey);
+    setFoodKey(nextFoodKey);
   } else {
     popTail();
   }
@@ -91,41 +84,41 @@ export function step(): void {
 }
 
 export function pushHead(nextHead: Coordinates): void {
-  currentSnake.push(nextHead);
+  const { snake } = useSnake();
+  const { snakeKeys, snakeVacantKeys } = useSnake();
 
   const key = toKey(nextHead);
 
-  currentVacantKeys.delete(key);
-
-  const [currentSnakeKeys] = useState<SetKeys>('currentSnakeKeys');
-
-  currentSnakeKeys.add(key);
+  snake.push(nextHead);
+  snakeVacantKeys.delete(key);
+  snakeKeys.add(key);
 }
 
 export function popTail() {
-  const tail = currentSnake.shift();
+  const { snake, snakeKeys, snakeVacantKeys } = useSnake();
+
+  const tail = snake.shift();
 
   if (tail) {
     const key = toKey(tail);
 
-    currentVacantKeys.add(key);
-
-    const [currentSnakeKeys] = useState<SetKeys>('currentSnakeKeys');
-
-    currentSnakeKeys.delete(key);
+    snakeVacantKeys.add(key);
+    snakeKeys.delete(key);
   }
 }
 
 export function spawnFood(): null | Key | void {
-  if (currentVacantKeys.size === 0) {
+  const { snakeVacantKeys } = useSnake();
+
+  if (snakeVacantKeys.size === 0) {
     return null;
   }
 
-  const choice = Math.floor(Math.random() * currentVacantKeys.size);
+  const choice = Math.floor(Math.random() * snakeVacantKeys.size);
 
   let i = 0;
 
-  for (let key of currentVacantKeys) {
+  for (let key of snakeVacantKeys) {
     if (i === choice) {
       return key;
     }
@@ -137,38 +130,46 @@ export function spawnFood(): null | Key | void {
 }
 
 export function saveScore(): void {
-  gameOverScore.innerHTML = score.toString();
-  scoreInGame.innerHTML = score.toString();
+  // TODO: refactor
+
+  const { score, strigifyScore } = useScore();
+
+  scoreInGame.innerHTML = strigifyScore;
+  gameOverScore.innerHTML = strigifyScore;
 
   if (window.localStorage.hasOwnProperty('score')) {
     if (score > Number(window.localStorage.getItem('score'))) {
-      gameOverBestScore.innerHTML = score.toString();
+      gameOverBestScore.innerHTML = strigifyScore;
 
-      window.localStorage.setItem('score', JSON.stringify(score));
+      window.localStorage.setItem('score', strigifyScore);
     } else {
       gameOverBestScore.innerHTML = window.localStorage.getItem('score') as string;
     }
   } else {
-    gameOverBestScore.innerHTML = score.toString();
+    gameOverBestScore.innerHTML = strigifyScore;
 
-    window.localStorage.setItem('score', JSON.stringify(score));
+    window.localStorage.setItem('score', strigifyScore);
   }
 }
 
 export function updateTimeout(): number {
-  if (ms <= 35) {
-    return ms;
+  const { milliseconds, setMilliseconds } = useMilliseconds(100);
+
+  if (milliseconds <= 35) {
+    return milliseconds;
+  } else {
+    setMilliseconds(milliseconds - 5);
   }
 
-  ms -= 5;
-
-  return ms;
+  return milliseconds;
 }
 
 export function stopGame(isSuccessfully: boolean): void {
-  gameOver = true;
-  gameOverSound.play();
+  const { setScreen } = useScreen();
 
+  setScreen('gameOver');
+
+  gameOverSound.play();
   scoreInGame.style.visibility = 'hidden';
   gameOverScreen.style.visibility = 'visible';
   canvas.style.borderColor = isSuccessfully ? 'darkgreen' : '#FFD829';
@@ -178,54 +179,52 @@ export function stopGame(isSuccessfully: boolean): void {
 }
 
 export function startGame(): void {
-  ms = 80;
-  score = 0;
-  gameOver = false;
+  const { score } = useScore(0);
+  const { setFoodKey } = useFood();
+  const { setScreen } = useScreen();
+  const { setDirectionQueue, setDirection } = useDirection();
+  const { milliseconds, setMilliseconds } = useMilliseconds();
+  const { snake, setSnake, snakeKeys, setSnakeKeys, snakeVacantKeys, setSnakeVacantKeys } =
+    useSnake();
 
   startSound.play();
 
-  const [, setDirectionQueue] = useState<MoveDirection[]>('directionQueue');
-  const [, setCurrentDirection] = useState<MoveDirection>('currentDirection');
-
+  setScreen('inGame');
+  setMilliseconds(100);
   setDirectionQueue([]);
-  setCurrentDirection(move.right);
-  currentSnake = makeInitialSnake(5);
-
-  const [currentSnakeKeys, setCurrentSnakeKeys] = useState<SetKeys>('currentSnakeKeys');
-
-  setCurrentSnakeKeys(new Set());
-  currentVacantKeys = new Set();
+  setDirection(move.right);
+  setSnake(makeInitialSnake(5));
+  setSnakeKeys(new Set());
+  setSnakeVacantKeys(new Set());
 
   scoreInGame.style.visibility = 'visible';
   gameOverScreen.style.visibility = 'hidden';
 
   for (let top = 0; top < ROWS; top += 1) {
     for (let left = 0; left < COLS; left += 1) {
-      currentVacantKeys.add(toKey([top, left]));
+      snakeVacantKeys.add(toKey([top, left]));
     }
   }
 
-  for (let cell of currentSnake) {
+  for (let cell of snake) {
     const key = toKey(cell);
 
-    currentVacantKeys.delete(key);
-    currentSnakeKeys.add(key);
+    snakeVacantKeys.delete(key);
+    snakeKeys.add(key);
   }
 
-  const [, setCurrentFoodKey] = useState<Key>('currentFoodKey');
+  setFoodKey(spawnFood() as Key);
 
-  setCurrentFoodKey(spawnFood() as Key);
+  const [currentKeys, vacantKeys] = partitionCells(snake);
 
-  const [snakeKeys, vacantKeys] = partitionCells(currentSnake);
-
-  setCurrentSnakeKeys(snakeKeys);
-  currentVacantKeys = vacantKeys;
+  setSnakeKeys(currentKeys);
+  setSnakeVacantKeys(vacantKeys);
 
   canvas.style.borderColor = '';
-  gameOverScore.innerHTML = score.toString();
   scoreInGame.innerHTML = score.toString();
+  gameOverScore.innerHTML = score.toString();
 
-  gameInterval = setInterval(step, updateTimeout());
+  gameInterval = setInterval(step, milliseconds);
 
   drawCanvas();
 }

@@ -1,5 +1,4 @@
-import { useState } from './state';
-import type { MoveDirection } from './types';
+import { useDirection } from './hooks';
 import { initializeCanvas } from './rendering';
 import { move, useMoveSound } from './utilities';
 import { startGame, stopGame, step } from './game-state';
@@ -12,7 +11,7 @@ window.addEventListener('keydown', (event) => {
 
   event.preventDefault();
 
-  const [directionQueue] = useState<MoveDirection[]>('directionQueue');
+  const { directionQueue } = useDirection();
 
   switch (event.key) {
     case 'ArrowLeft':
