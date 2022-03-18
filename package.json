@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "format": "prettier --check \"src/**/*.ts\"",
-    "typecheck": "tsc -p ./tsconfig.json"
+    "typecheck": "tsc -p ./tsconfig.json --noEmit"
   },
   "devDependencies": {
     "prettier": "^2.6.0",
