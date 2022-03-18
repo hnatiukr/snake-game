@@ -1,35 +1,27 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "rootDir": "src",
+    "outDir": "build/scripts",
+    "module": "CommonJS",
+    "target": "ES5",
+    "allowJs": true,
+    "moduleResolution": "Node",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "downlevelIteration": true,
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "dom",
       "dom.iterable",
-      "es2015.iterable",
-      "es2019"
-    ],
-    "declaration": false,
-    "stripInternal": true,
-    "declarationDir": null,
-    "emitDeclarationOnly": null,
-    "strict": true,
-    "alwaysStrict": true,
-    "skipLibCheck": true,
-    "noImplicitAny": true,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "noImplicitReturns": true,
-    "noUnusedParameters": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "noStrictGenericChecks": true,
-    "allowUnreachableCode": false,
-    "forceConsistentCasingInFileNames": true
+      "es2015",
+      "es2015.iterable"
+    ]
   },
   "include": [
-    "src",
-    "tests"
+    "src"
   ],
   "exclude": [
     "node_modules"

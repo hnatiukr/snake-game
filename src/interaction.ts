@@ -11,15 +11,14 @@ window.addEventListener('keydown', (event) => {
 
   event.preventDefault();
 
-  const { directionQueue } = useDirection();
-
   switch (event.key) {
     case 'ArrowLeft':
     case 'A':
     case 'a': {
       useMoveSound(move.left);
+      const { directionQueue, setDirectionQueue } = useDirection();
 
-      directionQueue.push(move.left);
+      setDirectionQueue([...directionQueue, move.left]);
 
       break;
     }
@@ -28,8 +27,9 @@ window.addEventListener('keydown', (event) => {
     case 'D':
     case 'd': {
       useMoveSound(move.right);
+      const { directionQueue, setDirectionQueue } = useDirection();
 
-      directionQueue.push(move.right);
+      setDirectionQueue([...directionQueue, move.right]);
 
       break;
     }
@@ -38,8 +38,9 @@ window.addEventListener('keydown', (event) => {
     case 'W':
     case 'w': {
       useMoveSound(move.up);
+      const { directionQueue, setDirectionQueue } = useDirection();
 
-      directionQueue.push(move.up);
+      setDirectionQueue([...directionQueue, move.up]);
 
       break;
     }
@@ -48,8 +49,12 @@ window.addEventListener('keydown', (event) => {
     case 'S':
     case 's': {
       useMoveSound(move.down);
+      const { directionQueue, setDirectionQueue } = useDirection();
 
-      directionQueue.push(move.down);
+      setDirectionQueue([...directionQueue, move.down]);
+
+      console.log('down');
+      console.log('directionQueue after push down', directionQueue);
 
       break;
     }

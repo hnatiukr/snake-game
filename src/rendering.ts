@@ -5,6 +5,9 @@ import { toKey, isOdd, isEven } from './utilities';
 
 const pixels = new Map();
 
+const { foodKey } = useFood();
+const { snakeKeys } = useSnake();
+
 export function initializeCanvas(): void {
   for (let top = 0; top < ROWS; top += 1) {
     for (let left = 0; left < COLS; left += 1) {
@@ -29,9 +32,6 @@ export function initializeCanvas(): void {
 }
 
 export function drawCanvas(): void {
-  const { foodKey } = useFood();
-  const { snakeKeys } = useSnake();
-
   for (let top = 0; top < ROWS; top += 1) {
     for (let left = 0; left < COLS; left += 1) {
       const key = toKey([top, left]);

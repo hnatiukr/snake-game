@@ -24,10 +24,15 @@ import {
 
 export let gameInterval: NodeJS.Timeout | null = null;
 
-export function step(): void {
-  const { snake, snakeKeys } = useSnake();
-  const { directionQueue, direction, setDirection } = useDirection();
+const { setScreen } = useScreen();
+const { foodKey, setFoodKey } = useFood();
+const { score, setScore, strigifyScore } = useScore(0);
+const { milliseconds, setMilliseconds } = useMilliseconds();
+const { directionQueue, setDirectionQueue, direction, setDirection } = useDirection();
+const { snake, setSnake, snakeKeys, setSnakeKeys, snakeVacantKeys, setSnakeVacantKeys } =
+  useSnake();
 
+export function step(): void {
   let nextDirection = direction;
 
   while (directionQueue.length > 0) {
@@ -53,11 +58,7 @@ export function step(): void {
 
   pushHead(nextHead);
 
-  const { foodKey, setFoodKey } = useFood();
-
   if (toKey(nextHead) === foodKey) {
-    const { score, setScore } = useScore();
-
     moveSound.pause();
     moveSound.currentTime = 0;
     eatSound.play();
@@ -84,19 +85,14 @@ export function step(): void {
 }
 
 export function pushHead(nextHead: Coordinates): void {
-  const { snake } = useSnake();
-  const { snakeKeys, snakeVacantKeys } = useSnake();
-
   const key = toKey(nextHead);
 
-  snake.push(nextHead);
+  setSnake([...snake, nextHead]);
   snakeVacantKeys.delete(key);
   snakeKeys.add(key);
 }
 
 export function popTail() {
-  const { snake, snakeKeys, snakeVacantKeys } = useSnake();
-
   const tail = snake.shift();
 
   if (tail) {
@@ -108,8 +104,6 @@ export function popTail() {
 }
 
 export function spawnFood(): null | Key | void {
-  const { snakeVacantKeys } = useSnake();
-
   if (snakeVacantKeys.size === 0) {
     return null;
   }
@@ -132,8 +126,6 @@ export function spawnFood(): null | Key | void {
 export function saveScore(): void {
   // TODO: refactor
 
-  const { score, strigifyScore } = useScore();
-
   scoreInGame.innerHTML = strigifyScore;
   gameOverScore.innerHTML = strigifyScore;
 
@@ -153,7 +145,7 @@ export function saveScore(): void {
 }
 
 export function updateTimeout(): number {
-  const { milliseconds, setMilliseconds } = useMilliseconds(100);
+  const { milliseconds, setMilliseconds } = useMilliseconds(90);
 
   if (milliseconds <= 35) {
     return milliseconds;
@@ -165,8 +157,6 @@ export function updateTimeout(): number {
 }
 
 export function stopGame(isSuccessfully: boolean): void {
-  const { setScreen } = useScreen();
-
   setScreen('gameOver');
 
   gameOverSound.play();
@@ -179,18 +169,10 @@ export function stopGame(isSuccessfully: boolean): void {
 }
 
 export function startGame(): void {
-  const { score } = useScore(0);
-  const { setFoodKey } = useFood();
-  const { setScreen } = useScreen();
-  const { setDirectionQueue, setDirection } = useDirection();
-  const { milliseconds, setMilliseconds } = useMilliseconds();
-  const { snake, setSnake, snakeKeys, setSnakeKeys, snakeVacantKeys, setSnakeVacantKeys } =
-    useSnake();
-
   startSound.play();
 
   setScreen('inGame');
-  setMilliseconds(100);
+  setMilliseconds(90);
   setDirectionQueue([]);
   setDirection(move.right);
   setSnake(makeInitialSnake(5));
@@ -213,12 +195,12 @@ export function startGame(): void {
     snakeKeys.add(key);
   }
 
-  setFoodKey(spawnFood() as Key);
-
   const [currentKeys, vacantKeys] = partitionCells(snake);
 
   setSnakeKeys(currentKeys);
   setSnakeVacantKeys(vacantKeys);
+
+  setFoodKey(spawnFood() as Key);
 
   canvas.style.borderColor = '';
   scoreInGame.innerHTML = score.toString();
