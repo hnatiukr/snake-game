@@ -4,4 +4,6 @@
 
 Snake is a game where the player maneuvers a growing line that becomes a primary obstacle to itself
 
-![Snake game](images/gameplay.png "Snake game")
+<p align="center">
+  <img src="images/gameplay.png" alt="Snake game" />
+</p>
