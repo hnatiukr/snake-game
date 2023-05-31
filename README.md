@@ -1,4 +1,4 @@
-# Snake game 🐍
+# Snake Game 🐍
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/67aa6997-915b-4001-a4d7-08ec99c503ae/deploy-status)](https://app.netlify.com/sites/mystifying-fermi-7d3aee/deploys)
 
