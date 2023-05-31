@@ -8,10 +8,9 @@
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <title>Snake</title>
+    <title>Snake Game</title>
 
-    <link rel="stylesheet" href="styles/styles.css" />
-    <link rel="stylesheet" href="styles/github.css" />
+    <link rel="stylesheet" href="src/styles.css" />
 
     <link
       rel="icon"
@@ -43,15 +42,15 @@
       </div>
     </div>
 
-    <audio id="eat-sound" src="sounds/eat.wav"></audio>
-    <audio id="move-sound" src="sounds/move.wav"></audio>
-    <audio id="start-sound" src="sounds/start.wav"></audio>
-    <audio id="game-over-sound" src="sounds/game-over.wav"></audio>
+    <audio id="eat-sound" src="src/sounds/eat.wav"></audio>
+    <audio id="move-sound" src="src/sounds/move.wav"></audio>
+    <audio id="start-sound" src="src/sounds/start.wav"></audio>
+    <audio id="game-over-sound" src="src/sounds/game-over.wav"></audio>
 
     <a
       class="github-corner"
       aria-label="View source on GitHub"
-      href="https://github.com/mort-gh/snake-game"
+      href="https://github.com/hnatiukr/snake-game"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -77,21 +76,6 @@
       </svg>
     </a>
 
-    <!--
-      Scripts order:
-        1. vars
-        2. rendering
-        3. game-state
-        4. interaction
-        5. utilities
-        6. debugging
-    -->
-
-    <script src="scripts/vars.js"></script>
-    <script src="scripts/rendering.js"></script>
-    <script src="scripts/game-state.js"></script>
-    <script src="scripts/interaction.js"></script>
-    <script src="scripts/utilities.js"></script>
-    <script src="scripts/debugging.js"></script>
+    <script src="src/game.js"></script>
   </body>
 </html>

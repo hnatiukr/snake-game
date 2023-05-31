@@ -1,0 +1,134 @@
+:root {
+  --c-vinage-100: #884a39;
+  --c-vinage-75: #c38154;
+  --c-vinage-50: #ffc26f;
+  --c-vinage-25: #f9e0bb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  background-color: var(--c-vinage-25);
+
+  color: var(--c-vinage-100);
+}
+
+#canvas {
+  position: relative;
+
+  width: 1000px;
+  height: 600px;
+
+  box-sizing: content-box;
+}
+
+#game_over_screen,
+#start_screen {
+  position: absolute;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 1000px;
+  height: 600px;
+
+  visibility: hidden;
+
+  background-color: var(--c-vinage-25);
+}
+
+#start_screen {
+  visibility: visible;
+
+  border-color: var(--c-vinage-25);
+}
+
+#restart_button,
+#start_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+
+  color: white;
+  font-size: 18px;
+
+  background-color: var(--c-vinage-100);
+
+  border: 0;
+  outline: 0;
+
+  cursor: pointer;
+}
+
+#start_button:hover,
+#restart_button:hover {
+  background-color: var(--c-vinage-75);
+}
+
+.orangered {
+  color: var(--c-vinage-100);
+}
+
+pre {
+  position: absolute;
+
+  top: -30px;
+  right: 0;
+}
+
+.github-svg {
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+
+  color: #fff;
+
+  fill: var(--c-vinage-100);
+}
+
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
+}
